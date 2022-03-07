@@ -1,18 +1,14 @@
-# Policy Gradient with Continuous Action Space
+# User-User Collaborative Filtering
 
-We use Gaussian probability distribution function to model the policy function. We then use policy gradient to train the model. We also use baseline to decrease the variance of the model.
+We implement a User-User Collaborative Filtering for rating prediction for the movies.
 
 <br />
 
 ## Task:
 
-The goal is to directly model the policy function as a Gassian probability distribution function and try to optimize it (i.e. find the optimal mean and covariance function for it). This approach is called **policy gradient**.
+The goal is to desing a User-User Collaborative Filtering that we can use to predict how would a given user would rate a given movie that he/she has not seen before. The idea is to identify users with the most similar “interactions profile” (nearest neighbors) to that user and see how they rated that movie, and based on the similarity coefficients (for between users) that we calculate, we then predict the ratings. We can later on use such ratings to recommend new movies to the users.
 
-
-
-## Solution:
-
-The trick we play is that we assume that the action comes from a Gaussian probability distribution function, and we estimate the parameters of that distribution function. We also use the *baseline* to help improving the performance of the model, and to do that, we use another neural network to estimate the state value functions V(s).
+We use the 20 million MovieLens data set available on [Kaggle](https://www.kaggle.com/grouplens/movielens-20m-dataset). Though, for practical implementation on a pc we shrink this dataset.
 
 ---
 
@@ -42,7 +38,7 @@ MSE for test set = 0.6078670855080118
 
 Note that to get a sense of whether this is a good performance or not we need to compare it with a benchmark, which I do not get into the details in here, but one simple case can be to for each user output his/her average rating as the prediction for a new movie. Another important factor is to note that this MSE is for a subset of the data that has most common users and most common movies. If we performe this algorithm on the original data (20 million ratings), it would take considerably longer time to finish the computations, and the error would increase as well for both the train and test set.
 
-
+---
 
 ### Theory of User-User Collaborative Filtering
 
